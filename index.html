@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotel Check-in Dialogue</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1 id="title">Checking in at a London hotel</h1>
+    <p class="sub" id="subtitle">Registro en un hotel de Londres · Level B1–B2</p>
+
+    <div class="controls">
+      <div class="seg" role="tablist" aria-label="Audio version">
+        <button role="tab" data-ver="a" class="on">Version A · Kokoro</button>
+        <button role="tab" data-ver="b">Version B · ElevenLabs</button>
+      </div>
+
+      <label id="voiceSetWrap">Voices
+        <select id="voiceSet"></select>
+      </label>
+
+      <label>Speed
+        <select id="speed">
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.15">1.15×</option>
+        </select>
+      </label>
+
+      <label class="chk"><input type="checkbox" id="showEs" checked> Español</label>
+      <label class="chk"><input type="checkbox" id="showNotes" checked> Notes</label>
+
+      <button id="playAll" class="primary">▶ Play all</button>
+      <button id="settingsBtn" hidden>⚙ ElevenLabs settings</button>
+    </div>
+    <div id="status" class="status" role="status"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <ol id="lines" class="lines"></ol>
+</main>
+
+<dialog id="settings">
+  <form method="dialog" class="dlg" id="settingsForm">
+    <h2>ElevenLabs settings <small>(Ajustes)</small></h2>
+
+    <fieldset>
+      <legend>1 · ElevenLabs</legend>
+      <label>API key
+        <input type="password" id="elKey" autocomplete="off" placeholder="sk_...">
+      </label>
+      <button type="button" id="loadEl">Load models &amp; voices</button>
+      <label>Model <select id="elModel"></select></label>
+      <label>Receptionist voice <select id="elVoiceR"></select></label>
+      <label>Guest voice <select id="elVoiceG"></select></label>
+      <p class="hint">Suggested: <code>eleven_turbo_v2_5</code> (0.5 credits/char, ≈1,100 credits for the whole dialogue). If a newer model appears in the list, you can pick it.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Save audio to GitHub <small>(optional but recommended)</small></legend>
+      <label class="chk"><input type="checkbox" id="ghOn"> Commit each audio to the repo as soon as it is generated</label>
+      <label>Repository <input type="text" id="ghRepo" placeholder="owner/repo"></label>
+      <label>Branch <input type="text" id="ghBranch"></label>
+      <label>GitHub token <input type="password" id="ghToken" autocomplete="off" placeholder="github_pat_..."></label>
+
+      <details>
+        <summary>How do I create the token? (Cómo crear el token)</summary>
+        <ol class="guide">
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> (GitHub → Settings → Developer settings → Personal access tokens → <em>Fine-grained tokens</em> → Generate new token).</li>
+          <li><b>Token name:</b> <code>hotel-dialogue-audio</code>. <b>Expiration:</b> 30 days is enough.</li>
+          <li><b>Repository access:</b> choose <em>Only select repositories</em> and pick just <code>albertlemon1/dialogs</code>.</li>
+          <li><b>Permissions → Repository permissions:</b> set <em>Contents</em> to <b>Read and write</b>. Leave everything else as "No access".</li>
+          <li>Click <em>Generate token</em> and copy it (it starts with <code>github_pat_</code>; it is shown only once).</li>
+          <li>Paste it above. It is stored only in this browser (<code>localStorage</code>) and sent only to <code>api.github.com</code>. Delete the token on GitHub when you finish.</li>
+        </ol>
+        <p class="hint">Audio is committed to <code>audio/b/&lt;model&gt;/&lt;voice_id&gt;/NN.mp3</code> on the branch above. If the branch doesn't exist on GitHub the commit will fail.</p>
+      </details>
+    </fieldset>
+
+    <div class="row">
+      <button type="button" id="genBtn" class="primary">Generate missing audio</button>
+      <button type="button" id="stopBtn" disabled>Stop</button>
+      <button type="button" id="closeBtn">Close</button>
+    </div>
+    <progress id="prog" value="0" max="1" hidden></progress>
+    <pre id="log" class="log"></pre>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
