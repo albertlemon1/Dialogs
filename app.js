@@ -11,7 +11,7 @@ const $ = (id) => document.getElementById(id);
 const DEFAULTS = {
   ver: "a", set: "emma-george", speed: "1", showEs: true, showNotes: true,
   elKey: "", elModel: DEFAULT_MODEL, elVoiceR: "", elVoiceG: "",
-  ghOn: false, ghRepo: "albertlemon1/dialogs", ghBranch: "claude/uk-hotel-reception-dialog-zugurc", ghToken: "",
+  ghOn: false, ghRepo: "albertlemon1/dialogs", ghBranch: "main", ghToken: "",
 };
 let cfg = { ...DEFAULTS };
 try { Object.assign(cfg, JSON.parse(localStorage.getItem("cfg") || "{}")); } catch (e) {}
