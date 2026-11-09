@@ -134,7 +134,7 @@ async function playOne(l) {
   if (cfg.ver === "a") {
     url = `audio/a/${cfg.set}/${nn(l.id)}.mp3`;
   } else {
-    if (!cfg.elModel || !bVoice(l)) { openSettings(); throw new Error("Choose a model and voices first."); }
+    if (!cfg.elModel || !bVoice(l)) { setStatus("No default voices found. Reload the page (Ctrl+Shift+R) or choose them in ElevenLabs settings.", true); throw new Error("missing"); }
     const blob = await getB(l);
     if (!blob) {
       $("err-" + l.id).textContent = "Audio not generated yet — open ElevenLabs settings → Generate.";
@@ -283,13 +283,13 @@ function openSettings() {
 
 /* ---------- init ---------- */
 (async function init() {
-  D = await (await fetch("data/dialogue.json")).json();
+  D = await (await fetch("data/dialogue.json", { cache: "no-cache" })).json();
   // Defaults for Version B shipped in the repo, so a fresh browser can play without a key.
   if (!cfg.elVoiceR || !cfg.elVoiceG) {
     try {
       const c = await (await fetch("audio/b/config.json", { cache: "no-cache" })).json();
       cfg.elModel = c.model; cfg.elVoiceR = c.voices.R; cfg.elVoiceG = c.voices.G;
-    } catch (e) {}
+    } catch (e) { setStatus("Could not load audio/b/config.json (" + e.message + "). Reload the page without cache.", true); }
   }
   $("title").textContent = D.title;
   $("subtitle").textContent = `${D.title_es} · Level ${D.level}`;
