@@ -284,6 +284,13 @@ function openSettings() {
 /* ---------- init ---------- */
 (async function init() {
   D = await (await fetch("data/dialogue.json")).json();
+  // Defaults for Version B shipped in the repo, so a fresh browser can play without a key.
+  if (!cfg.elVoiceR || !cfg.elVoiceG) {
+    try {
+      const c = await (await fetch("audio/b/config.json", { cache: "no-cache" })).json();
+      cfg.elModel = c.model; cfg.elVoiceR = c.voices.R; cfg.elVoiceG = c.voices.G;
+    } catch (e) {}
+  }
   $("title").textContent = D.title;
   $("subtitle").textContent = `${D.title_es} · Level ${D.level}`;
   fillSelect($("voiceSet"), Object.entries(VOICE_SETS_A), cfg.set);
