@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hotel Check-in Dialogue</title>
-<link rel="stylesheet" href="style.css?v=3">
+<title>English Travel Dialogues</title>
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <h1 id="title">Checking in at a London hotel</h1>
-    <p class="sub" id="subtitle">Registro en un hotel de Londres · Level B1–B2</p>
+    <div class="seg scenarios" id="scSeg" role="tablist" aria-label="Scenario"></div>
+    <h1 id="title">English Travel Dialogues</h1>
+    <p class="sub" id="subtitle">Diálogos de viaje en inglés</p>
 
     <div class="controls">
-      <div class="seg" role="tablist" aria-label="Audio version">
+      <div class="seg" id="verSeg" role="tablist" aria-label="Audio version">
         <button role="tab" data-ver="a" class="on">Version A · Kokoro</button>
         <button role="tab" data-ver="b">Version B · ElevenLabs</button>
       </div>
@@ -47,6 +48,7 @@
 <dialog id="settings">
   <form method="dialog" class="dlg" id="settingsForm">
     <h2>ElevenLabs settings <small>(Ajustes)</small></h2>
+    <p class="hint" id="dlgScenario"></p>
 
     <fieldset>
       <legend>1 · ElevenLabs</legend>
@@ -55,9 +57,8 @@
       </label>
       <button type="button" id="loadEl">Load models &amp; voices</button>
       <label>Model <select id="elModel"></select></label>
-      <label>Receptionist voice <select id="elVoiceR"></select></label>
-      <label>Guest voice <select id="elVoiceG"></select></label>
-      <p class="hint">Suggested: <code>eleven_turbo_v2_5</code> (0.5 credits/char, ≈1,100 credits for the whole dialogue). If a newer model appears in the list, you can pick it.</p>
+      <div id="elVoices" class="voices"></div>
+      <p class="hint">The hotel used <code>eleven_v4_turbo</code>. Cheaper option: <code>eleven_turbo_v2_5</code> (0.5 credits/char). Hotel ≈2,200 characters, airport ≈3,400.</p>
     </fieldset>
 
     <fieldset>
@@ -77,7 +78,7 @@
           <li>Click <em>Generate token</em> and copy it (it starts with <code>github_pat_</code>; it is shown only once).</li>
           <li>Paste it above. It is stored only in this browser (<code>localStorage</code>) and sent only to <code>api.github.com</code>. Delete the token on GitHub when you finish.</li>
         </ol>
-        <p class="hint">Audio is committed to <code>audio/b/&lt;model&gt;/&lt;voice_id&gt;/NN.mp3</code> on the branch above. If the branch doesn't exist on GitHub the commit will fail.</p>
+        <p class="hint">Audio is committed to <code>audio/&lt;scenario&gt;/b/&lt;model&gt;/&lt;voice_id&gt;/NN.mp3</code> (plus <code>config.json</code> with the chosen voices) on the branch above. If the branch doesn't exist on GitHub the commit will fail.</p>
       </details>
     </fieldset>
 
@@ -91,6 +92,6 @@
   </form>
 </dialog>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
