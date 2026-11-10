@@ -1,10 +1,10 @@
 :root {
   --bg: #f6f4ef; --card: #fff; --ink: #1d2430; --muted: #667085; --line: #e3dfd6;
-  --acc: #1f4e8c; --acc-ink: #fff; --r: #e8eef8; --g: #f6ece4; --bad: #b42318; --ok: #1a7f4b;
+  --acc: #1f4e8c; --acc-ink: #fff; --r: #e8eef8; --g: #f6ece4; --ann: #eeeeee; --bad: #b42318; --ok: #1a7f4b;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg:#14171c; --card:#1d222a; --ink:#e8eaee; --muted:#9aa3b2; --line:#2b323d;
-          --acc:#6aa3f0; --acc-ink:#0c1118; --r:#1d2a3d; --g:#34281f; --bad:#ff8a80; --ok:#5fd39a; }
+          --acc:#6aa3f0; --acc-ink:#0c1118; --r:#1d2a3d; --g:#34281f; --ann:#262b33; --bad:#ff8a80; --ok:#5fd39a; }
 }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
@@ -30,8 +30,14 @@ button.primary { background:var(--acc); color:var(--acc-ink); border-color:var(-
 
 .lines { list-style:none; margin:16px 0 48px; padding:0; display:flex; flex-direction:column; gap:10px; }
 .line { display:flex; gap:12px; padding:12px; background:var(--card); border:1px solid var(--line); border-radius:12px; max-width: 88%; }
-.line.R { background: var(--r); align-self:flex-start; }
-.line.G { background: var(--g); align-self:flex-end; }
+.line.side-left { background: var(--r); align-self:flex-start; }
+.line.side-right { background: var(--g); align-self:flex-end; }
+.line.side-center { background: var(--ann); align-self:center; border-style:dashed; max-width:94%; }
+.line.side-center .en { font-style: italic; }
+.lines .scene { margin: 14px 0 2px; padding: 6px 0; border-bottom: 1px solid var(--line); font-weight: 600; display:flex; flex-direction:column; }
+.lines .scene .es { font-weight: 400; font-size: .85rem; color: var(--muted); }
+.scenarios { margin-bottom: 10px; }
+.voices { display:flex; flex-direction:column; gap:8px; }
 .line.playing { outline: 2px solid var(--acc); }
 .line .play { flex:none; width:40px; height:40px; border-radius:50%; padding:0; }
 .line .who { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }

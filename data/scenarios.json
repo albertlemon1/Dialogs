@@ -1,0 +1,23 @@
+{
+  "default": "hotel",
+  "scenarios": [
+    {
+      "id": "hotel",
+      "label": "Hotel",
+      "label_es": "Hotel",
+      "voice_sets": {
+        "emma-george": { "label": "Emma (F) + George (M)", "voices": { "R": "bf_emma", "G": "bm_george" } },
+        "isabella-lewis": { "label": "Isabella (F) + Lewis (M)", "voices": { "R": "bf_isabella", "G": "bm_lewis" } }
+      }
+    },
+    {
+      "id": "airport",
+      "label": "Airport",
+      "label_es": "Aeropuerto",
+      "voice_sets": {
+        "emma-george-lewis-alice": { "label": "Emma · George · Lewis · Alice", "voices": { "T": "bf_emma", "P": "bm_george", "G": "bm_lewis", "A": "bf_alice" } },
+        "isabella-daniel-lily-fable": { "label": "Isabella · Daniel · Lily · Fable", "voices": { "T": "bf_isabella", "P": "bm_daniel", "G": "bf_lily", "A": "bm_fable" } }
+      }
+    }
+  ]
+}
